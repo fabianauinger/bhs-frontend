@@ -11,5 +11,5 @@ import { environment } from '../environments/environment';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'bhs-frontend - '+environment.envName;
+  title = 'bhs-frontend - '+(window as any)['APP_ENV'] || 'UNKNOWN';;
 }
