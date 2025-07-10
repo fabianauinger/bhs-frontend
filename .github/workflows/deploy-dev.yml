@@ -50,5 +50,5 @@ jobs:
           docker pull ghcr.io/${{ secrets.GHCR_USERNAME }}/${{ secrets.IMAGE_NAME }}:latest
           docker stop bhs-frontend || true
           docker rm bhs-frontend || true
-          docker run -d --name bhs-frontend -p 80:80 ghcr.io/${{ secrets.GHCR_USERNAME }}/${{ secrets.IMAGE_NAME }}:latest
+          docker run -d --name bhs-frontend -p 4200:80 ghcr.io/${{ secrets.GHCR_USERNAME }}/${{ secrets.IMAGE_NAME }}:latest
 
