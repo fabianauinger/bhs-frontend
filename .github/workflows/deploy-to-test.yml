@@ -1,4 +1,4 @@
-name: Promote Dev to Test
+name: TEST Deployment
 
 on:
   workflow_dispatch:
