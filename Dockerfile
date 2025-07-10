@@ -1,11 +1,22 @@
-# 1. Build-Phase mit Node.js
-FROM node:18 as builder
-WORKDIR /app
-COPY . .
-RUN npm install
-RUN npx ng build bhs-frontend --configuration production
+# 1. Build Stage
+FROM node:18 AS build
 
-# 2. Produktiv-Phase mit NGINX
-FROM nginx:stable-alpine
-COPY --from=builder /app/dist/bhs-frontend /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/nginx.conf
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+
+RUN npm run build --configuration production
+
+# 2. Production Stage mit NGINX
+FROM nginx:alpine
+
+# Angular build wird in den NGINX Web Root kopiert
+COPY --from=build /app/dist/bhs-frontend /usr/share/nginx/html
+
+# Optional: NGINX config anpassen, wenn nötig
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
