@@ -48,7 +48,7 @@ jobs:
         key: ${{ secrets.DEPLOY_KEY }}
         script: |
           docker pull ghcr.io/${{ secrets.GHCR_USERNAME }}/${{ secrets.IMAGE_NAME }}:dev
-          docker stop bhs-frontend || true
+          docker stop bhs-frontend-dev || true
           docker rm bhs-frontend || true
-          docker run -d --name bhs-frontend -p 4200:80 ghcr.io/${{ secrets.GHCR_USERNAME }}/${{ secrets.IMAGE_NAME }}:dev
+          docker run -d --name bhs-frontend-dev -p 8081:80 ghcr.io/${{ secrets.GHCR_USERNAME }}/${{ secrets.IMAGE_NAME }}:dev
 
