@@ -14,7 +14,8 @@ RUN npm run build
 FROM nginx:alpine
 
 # Angular build wird in den NGINX Web Root kopiert
-COPY --from=build /app/dist/bhs-frontend /usr/share/nginx/html
+COPY --from=build /app/dist/bhs-frontend/browser /usr/share/nginx/html
+
 
 # Optional: NGINX config anpassen, wenn nötig
 EXPOSE 80
