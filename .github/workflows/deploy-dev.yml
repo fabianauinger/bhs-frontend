@@ -38,7 +38,7 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ghcr.io/${{ secrets.GHCR_USERNAME }}/${{ secrets.IMAGE_NAME }}:latest
+        tags: ghcr.io/${{ secrets.GHCR_USERNAME }}/${{ secrets.IMAGE_NAME }}:dev
     
     - name: Deploy to Hetzner Server via SSH
       uses: appleboy/ssh-action@v1.0.0
@@ -47,8 +47,8 @@ jobs:
         username: ${{ secrets.SERVER_USER }} 
         key: ${{ secrets.DEPLOY_KEY }}
         script: |
-          docker pull ghcr.io/${{ secrets.GHCR_USERNAME }}/${{ secrets.IMAGE_NAME }}:latest
+          docker pull ghcr.io/${{ secrets.GHCR_USERNAME }}/${{ secrets.IMAGE_NAME }}:dev
           docker stop bhs-frontend || true
           docker rm bhs-frontend || true
-          docker run -d --name bhs-frontend -p 4200:80 ghcr.io/${{ secrets.GHCR_USERNAME }}/${{ secrets.IMAGE_NAME }}:latest
+          docker run -d --name bhs-frontend -p 4200:80 ghcr.io/${{ secrets.GHCR_USERNAME }}/${{ secrets.IMAGE_NAME }}:dev
 
