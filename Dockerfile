@@ -3,7 +3,7 @@ FROM node:18 as builder
 WORKDIR /app
 COPY . .
 RUN npm install
-RUN npm run build --configuration production
+RUN npx ng build bhs-frontend --configuration production
 
 # 2. Produktiv-Phase mit NGINX
 FROM nginx:stable-alpine
