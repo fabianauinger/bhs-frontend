@@ -38,7 +38,7 @@ jobs:
 
     - name: Commit version.ts
       env:
-        GH_TOKEN: ${{ secrets.GHCR_TOKEN }}
+        GH_TOKEN: ${{ secrets.GH_PAT }}
       run: |
         git config user.name "github-actions"
         git config user.email "actions@github.com"
@@ -46,6 +46,7 @@ jobs:
         git add src/version.ts
         git commit -m "🔖 Set version.ts [CI skip]" || echo "Nothing to commit"
         git push
+
 
 
     - name: Build and Push Image
