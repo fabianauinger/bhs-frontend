@@ -33,8 +33,12 @@ jobs:
         password: ${{ secrets.GHCR_TOKEN }}
 
     - name: Build and Push Image
-        run: |
-        docker build --build-arg BUILD_ENV=dev -t ghcr.io/${GHCR_USERNAME}/bhs-frontend:dev .
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./Dockerfile
+        push: true
+        tags: ghcr.io/${{ secrets.GHCR_USERNAME }}/${{ secrets.IMAGE_NAME }}:dev
     
     - name: Deploy to Hetzner Server via SSH
       uses: appleboy/ssh-action@v1.0.0
