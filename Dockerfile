@@ -1,23 +1,18 @@
-# 1. Build Stage
-FROM node:18 AS build
+# Dockerfile
+
+# ======= STAGE 1: Bestehendes dev-image als Basis =======
+FROM ghcr.io/YOUR_USER/bhs-frontend:dev AS base
+
+# ======= STAGE 2: Test-Build erstellen =======
+FROM node:18-alpine AS builder
 
 WORKDIR /app
+COPY --from=base /app /app
 
-COPY package*.json ./
+ARG BUILD_ENV=test
 RUN npm install
+RUN npm run build -- --configuration=$BUILD_ENV
 
-COPY . .
-
-RUN npm run build
-
-# 2. Production Stage mit NGINX
+# ======= STAGE 3: Deployment mit Nginx =======
 FROM nginx:alpine
-
-# Angular build wird in den NGINX Web Root kopiert
-COPY --from=build /app/dist/bhs-frontend/browser /usr/share/nginx/html
-
-
-# Optional: NGINX config anpassen, wenn nötig
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
+COPY --from=builder /app/dist/bhs-frontend /usr/share/nginx/html

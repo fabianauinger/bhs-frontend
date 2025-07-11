@@ -20,7 +20,7 @@ jobs:
     - name: Install & Build Angular App
       run: |
         npm install
-        npx ng build bhs-frontend --configuration production
+        npx ng build bhs-frontend --configuration development
 
     - name: Set up Docker
       uses: docker/setup-buildx-action@v2
