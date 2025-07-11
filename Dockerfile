@@ -4,7 +4,7 @@ FROM node:18-alpine AS builder
 WORKDIR /app
 COPY . .
 
-ARG BUILD_ENV=dev
+ARG BUILD_ENV=test
 ENV BUILD_ENV=${BUILD_ENV} 
 RUN echo "🔍 BUILD_ENV: $BUILD_ENV"
 
