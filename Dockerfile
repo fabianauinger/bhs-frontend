@@ -9,7 +9,7 @@ ENV BUILD_ENV=${BUILD_ENV}
 RUN echo "🔍 BUILD_ENV: $BUILD_ENV"
 
 RUN npm install
-RUN npm run build -- --configuration=$BUILD_ENV
+RUN npm run build --configuration=$BUILD_ENV
 
 # ====== Stage 2: Serve with Nginx ======
 FROM nginx:alpine
