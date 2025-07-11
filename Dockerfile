@@ -4,7 +4,6 @@ FROM node:18-alpine AS builder
 WORKDIR /app
 COPY . .
 
-ARG BUILD_ENV=test
 RUN npm install
 RUN npm run build -- --configuration=$BUILD_ENV
 
