@@ -7,10 +7,6 @@ jobs:
   deploy-test:
     runs-on: ubuntu-latest
 
-    env:
-      GHCR_USERNAME: ${{ secrets.GHCR_USERNAME }}
-      GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -19,14 +15,14 @@ jobs:
         run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u "${{ secrets.GHCR_USERNAME }}" --password-stdin
 
       - name: Pull dev base image
-        run: docker pull ghcr.io/${GHCR_USERNAME}/bhs-frontend:dev
+        run: docker pull ghcr.io/${ secrets.GHCR_USERNAME }/bhs-frontend:dev
 
       - name: Build test image based on dev
         run: |
-          docker build --build-arg BUILD_ENV=test -t ghcr.io/${GHCR_USERNAME}/bhs-frontend:test .
+          docker build --build-arg BUILD_ENV=test -t ghcr.io/${ secrets.GHCR_USERNAME }/bhs-frontend:test .
 
       - name: Push test image
-        run: docker push ghcr.io/${GHCR_USERNAME}/bhs-frontend:test
+        run: docker push ghcr.io/${ secrets.GHCR_USERNAME }/bhs-frontend:test
 
       - name: SSH Deploy to Test Server
         uses: appleboy/ssh-action@v1.0.0
