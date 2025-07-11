@@ -20,7 +20,7 @@ jobs:
 
       - name: Build test image based on dev
         run: |
-          docker build --build-arg BUILD_ENV=test -t ghcr.io/fabianauinger/bhs-frontend:test .
+          docker build --no-cache --build-arg BUILD_ENV=test -t ghcr.io/fabianauinger/bhs-frontend:test .
 
       - name: Push test image
         run: docker push ghcr.io/fabianauinger/bhs-frontend:test
