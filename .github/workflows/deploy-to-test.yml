@@ -15,7 +15,8 @@ jobs:
         run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u "${{ secrets.GHCR_USERNAME }}" --password-stdin
 
       - name: Pull dev base image
-        run: docker pull ghcr.io/${ secrets.GHCR_USERNAME }/bhs-frontend:dev
+        run: | 
+          docker pull ghcr.io/${ secrets.GHCR_USERNAME }/bhs-frontend:dev
 
       - name: Build test image based on dev
         run: |
