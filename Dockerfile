@@ -4,7 +4,6 @@ WORKDIR /app
 COPY . .
 
 ARG BUILD_ENV
-ENV BUILD_ENV=${BUILD_ENV}
 
 RUN echo "📦 Building with Angular config: $BUILD_ENV"
 RUN npm install
