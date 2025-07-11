@@ -36,12 +36,13 @@ jobs:
       run: |
         echo "export const version = { build: ${{ github.run_number }}, commitHash: '${{ github.sha }}', buildTime: '$(date -u +"%Y-%m-%dT%H:%M:%SZ")' };" > src/version.ts
 
-    - name: Upload version.ts as artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: dev-version
-        path: src/version.ts
-
+    - name: Commit version.ts
+      run: |
+        git config user.name "github-actions"
+        git config user.email "actions@github.com"
+        git add src/version.ts
+        git commit -m "🔖 Set version.ts [CI skip]" || echo "No changes to commit"
+        git push
 
     - name: Build and Push Image
       uses: docker/build-push-action@v5

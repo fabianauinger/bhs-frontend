@@ -14,13 +14,6 @@ jobs:
       - name: Log in to GHCR
         run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u "${{ secrets.GHCR_USERNAME }}" --password-stdin
 
-      - name: Download version.ts from dev
-        uses: actions/download-artifact@v4
-        with:
-          name: dev-version
-          path: src/
-
-
       - name: Build test image
         run: |
           docker build --no-cache --build-arg BUILD_ENV=test -t ghcr.io/fabianauinger/bhs-frontend:test .
