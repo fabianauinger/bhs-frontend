@@ -42,12 +42,10 @@ jobs:
           BUILD_ENV=development
         tags: ghcr.io/${{ secrets.GHCR_USERNAME }}/${{ secrets.IMAGE_NAME }}:dev
       
-    - name: Generate version file
+    - name: Write version.ts
       run: |
-        echo "export const version = {" > src/version.ts
-        echo "  commitHash: '${{ github.sha }}'," >> src/version.ts
-        echo "  buildTime: '$(date -u +%Y-%m-%dT%H:%M:%SZ)'" >> src/version.ts
-        echo "};" >> src/version.ts
+        echo "export const version = { commitHash: '${{ github.sha }}', buildTime: '$(date -u +"%Y-%m-%dT%H:%M:%SZ")' };" > src/version.ts
+
 
     - name: Upload version file
       uses: actions/upload-artifact@v4
