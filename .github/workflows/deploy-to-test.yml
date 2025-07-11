@@ -23,10 +23,7 @@ jobs:
 
       - name: Build test image based on dev
         run: |
-          docker build \
-            --build-arg BUILD_ENV=test \
-            --build-arg BASE_IMAGE=ghcr.io/${GHCR_USERNAME}/bhs-frontend:dev \
-            -t ghcr.io/${GHCR_USERNAME}/bhs-frontend:test .
+          docker build --build-arg BUILD_ENV=test -t ghcr.io/${GHCR_USERNAME}/bhs-frontend:test .
 
       - name: Push test image
         run: docker push ghcr.io/${GHCR_USERNAME}/bhs-frontend:test
