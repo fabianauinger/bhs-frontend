@@ -31,9 +31,9 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.DEPLOY_KEY }}
           script: |
-            docker pull ghcr.io/${ secrets.GHCR_USERNAME }/bhs-frontend:test
-            docker stop bhs-frontend-test || true
-            docker rm bhs-frontend-test || true
+            docker pull ghcr.io/${ secrets.GHCR_USERNAME }/bhs-frontend:test || echo "Image not found, skipping pull"
+            docker stop bhs-frontend-test || true || echo "Container not running, skipping stop"
+            docker rm bhs-frontend-test || true || echo "Container not found, skipping remove"
             docker run -d --name bhs-frontend-test -p 8082:80 ghcr.io/${ secrets.GHCR_USERNAME }/bhs-frontend:test
 
 
