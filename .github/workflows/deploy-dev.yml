@@ -43,11 +43,18 @@ jobs:
         tags: ghcr.io/${{ secrets.GHCR_USERNAME }}/${{ secrets.IMAGE_NAME }}:dev
       
     - name: Generate version file
-        run: |
-          echo "export const version = {" > src/version.ts
-          echo "  commitHash: '${{ github.sha }}'," >> src/version.ts
-          echo "  buildTime: '$(date -u +%Y-%m-%dT%H:%M:%SZ)'" >> src/version.ts
-          echo "};" >> src/version.ts
+      run: |
+        echo "export const version = {" > src/version.ts
+        echo "  commitHash: '${{ github.sha }}'," >> src/version.ts
+        echo "  buildTime: '$(date -u +%Y-%m-%dT%H:%M:%SZ)'" >> src/version.ts
+        echo "};" >> src/version.ts
+
+    - name: Upload version file
+      uses: actions/upload-artifact@v4
+      with:
+        name: version
+        path: src/version.ts
+
 
     
     - name: Deploy to Hetzner Server via SSH
