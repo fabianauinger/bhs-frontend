@@ -14,6 +14,5 @@ import { version } from '../version'; // Assuming version.ts is in the src direc
 export class AppComponent {
   title = 'bhs-frontend - ' + environment.envName;
   backendUrl = environment.backendUrl;
-  buildTime = version.buildTime; // Accessing the version from version.ts
-  commitHash = version.commitHash; // Accessing the version from version.ts 
+  build = version.build;
 }
