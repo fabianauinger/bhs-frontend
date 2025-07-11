@@ -31,9 +31,9 @@ jobs:
       - name: SSH Deploy to Test Server
         uses: appleboy/ssh-action@v1.0.0
         with:
-          host: ${{ secrets.TEST_SERVER_HOST }}
-          username: ${{ secrets.TEST_SERVER_USER }}
-          key: ${{ secrets.TEST_SERVER_SSH_KEY }}
+          host: ${{ secrets.TEST_SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.DEPLOY_KEY }}
           script: |
             docker pull ghcr.io/${GHCR_USERNAME}/bhs-frontend:test
             docker stop bhs-frontend-test || true
