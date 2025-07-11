@@ -16,7 +16,7 @@ jobs:
 
       - name: Pull dev base image
         run: | 
-          docker pull ghcr.io/${ secrets.GHCR_USERNAME }/bhs-frontend:dev
+          docker pull ghcr.io/fabianauinger/bhs-frontend:dev
 
       - name: Build test image based on dev
         run: |
