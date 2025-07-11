@@ -1,7 +1,7 @@
 # Dockerfile
 
 # ======= STAGE 1: Bestehendes dev-image als Basis =======
-FROM ghcr.io/YOUR_USER/bhs-frontend:dev AS base
+FROM ghcr.io/fabianauinger/bhs-frontend:dev AS base
 
 # ======= STAGE 2: Test-Build erstellen =======
 FROM node:18-alpine AS builder
