@@ -38,6 +38,8 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
+        arguments: |
+          BUILD_ENV=dev
         tags: ghcr.io/${{ secrets.GHCR_USERNAME }}/${{ secrets.IMAGE_NAME }}:dev
     
     - name: Deploy to Hetzner Server via SSH
