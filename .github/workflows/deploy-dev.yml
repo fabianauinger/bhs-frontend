@@ -30,7 +30,11 @@ jobs:
       with:
         registry: ghcr.io
         username: ${{ secrets.GHCR_USERNAME }}
-        password: ${{ secrets.GHCR_TOKEN }}
+        password: ${{ secrets.GHCR_TOKEN }} 
+      
+    - name: Write version.ts with current commit info
+      run: |
+        echo "export const version = { commitHash: '${{ github.sha }}', buildTime: '$(date -u +"%Y-%m-%dT%H:%M:%SZ")' };" > src/version.ts
 
     - name: Build and Push Image
       uses: docker/build-push-action@v5
@@ -42,11 +46,6 @@ jobs:
           BUILD_ENV=development
         tags: ghcr.io/${{ secrets.GHCR_USERNAME }}/${{ secrets.IMAGE_NAME }}:dev
       
-    - name: Write version.ts
-      run: |
-        echo "export const version = { commitHash: '${{ github.sha }}', buildTime: '$(date -u +"%Y-%m-%dT%H:%M:%SZ")' };" > src/version.ts
-
-
     - name: Upload version file
       uses: actions/upload-artifact@v4
       with:
