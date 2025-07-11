@@ -35,9 +35,9 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.DEPLOY_KEY }}
           script: |
-            docker pull ghcr.io/${GHCR_USERNAME}/bhs-frontend:test
+            docker pull ghcr.io/${ secrets.GHCR_USERNAME }/bhs-frontend:test
             docker stop bhs-frontend-test || true
             docker rm bhs-frontend-test || true
-            docker run -d --name bhs-frontend-test -p 8082:80 ghcr.io/${GHCR_USERNAME}/bhs-frontend:test
+            docker run -d --name bhs-frontend-test -p 8082:80 ghcr.io/${ secrets.GHCR_USERNAME }/bhs-frontend:test
 
 
