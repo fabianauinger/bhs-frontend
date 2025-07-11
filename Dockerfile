@@ -12,6 +12,7 @@ RUN npm install
 RUN npm run build --configuration=$BUILD_ENV
 
 # ====== Stage 2: Serve with Nginx ======
+RUN ls -la /app/dist/bhs-frontend
 FROM nginx:alpine
 COPY --from=builder /app/dist/bhs-frontend /usr/share/nginx/html
 
