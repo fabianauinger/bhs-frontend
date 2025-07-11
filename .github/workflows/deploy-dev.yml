@@ -38,7 +38,7 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        arguments: |
+        build-args: |
           BUILD_ENV=development
         tags: ghcr.io/${{ secrets.GHCR_USERNAME }}/${{ secrets.IMAGE_NAME }}:dev
     
