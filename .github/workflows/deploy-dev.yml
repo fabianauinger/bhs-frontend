@@ -37,12 +37,16 @@ jobs:
         echo "export const version = { build: ${{ github.run_number }}, commitHash: '${{ github.sha }}', buildTime: '$(date -u +"%Y-%m-%dT%H:%M:%SZ")' };" > src/version.ts
 
     - name: Commit version.ts
+      env:
+        GH_TOKEN: ${{ secrets.GHCR_TOKEN }}
       run: |
         git config user.name "github-actions"
         git config user.email "actions@github.com"
+        git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}
         git add src/version.ts
-        git commit -m "🔖 Set version.ts [CI skip]" || echo "No changes to commit"
+        git commit -m "🔖 Set version.ts [CI skip]" || echo "Nothing to commit"
         git push
+
 
     - name: Build and Push Image
       uses: docker/build-push-action@v5
