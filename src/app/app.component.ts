@@ -12,4 +12,5 @@ import { environment } from '../environments/environment';
 })
 export class AppComponent {
   title = 'bhs-frontend - ' + environment.envName;
+  backendUrl = environment.backendUrl;
 }
